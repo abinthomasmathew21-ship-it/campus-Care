@@ -1,0 +1,141 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, contact info, and department",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["Student", "Staff", "Maintenance Staff", "Administrator"] },
+        "department": { "type": "string", "maxLength": 80 },
+        "collegeId": { "type": "string", "maxLength": 50 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Campus infrastructure issue or maintenance complaint",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "complaintId": { "type": "string", "maxLength": 32 },
+        "title": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "location": { "type": "string", "maxLength": 100 },
+        "building": { "type": "string", "maxLength": 80 },
+        "floor": { "type": "string", "maxLength": 50 },
+        "category": { "type": "string", "maxLength": 50 },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Urgent"] },
+        "status": { "type": "string", "enum": ["SUBMITTED", "VERIFIED", "ASSIGNED", "IN PROGRESS", "RESOLVED", "REJECTED"] },
+        "assignedStaff": { "type": "string", "maxLength": 128 },
+        "assignedStaffName": { "type": "string", "maxLength": 100 },
+        "department": { "type": "string", "maxLength": 80 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 100 },
+        "userEmail": { "type": "string", "maxLength": 100 },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "satisfactionRating": { "type": "number" },
+        "satisfactionComment": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["title", "description", "building", "category", "priority", "status", "userId"]
+    },
+    "ComplaintHistory": {
+      "title": "ComplaintHistory",
+      "description": "Audit and timeline entries for complaint state transitions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "complaintId": { "type": "string", "maxLength": 128 },
+        "status": { "type": "string", "enum": ["SUBMITTED", "VERIFIED", "ASSIGNED", "IN PROGRESS", "RESOLVED", "REJECTED"] },
+        "comment": { "type": "string", "maxLength": 500 },
+        "changedBy": { "type": "string", "maxLength": 128 },
+        "changedByName": { "type": "string", "maxLength": 100 },
+        "changedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["complaintId", "status", "changedBy", "changedAt"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Campus facilities maintenance departments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "head": { "type": "string", "maxLength": 100 },
+        "staffCount": { "type": "number" },
+        "openIssues": { "type": "number" },
+        "resolvedIssues": { "type": "number" },
+        "responseStatus": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 300 }
+      },
+      "required": ["name"]
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "Campus maintenance and facility personnel",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "employeeId": { "type": "string", "maxLength": 50 },
+        "department": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "activeAssignments": { "type": "number" },
+        "completedIssues": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "On Leave", "On Call"] }
+      },
+      "required": ["name", "department", "employeeId"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "Feedback and satisfaction ratings submitted by students upon issue resolution",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "complaintId": { "type": "string", "maxLength": 128 },
+        "studentId": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 100 },
+        "rating": { "type": "number" },
+        "satisfaction": { "type": "string", "enum": ["Excellent", "Good", "Average", "Poor"] },
+        "comment": { "type": "string", "maxLength": 500 },
+        "submittedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["complaintId", "studentId", "rating"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles with role and department information"
+    },
+    "/complaints/{complaintId}": {
+      "schema": "Complaint",
+      "description": "Campus issues and complaints reported across buildings"
+    },
+    "/complaints/{complaintId}/history/{historyId}": {
+      "schema": "ComplaintHistory",
+      "description": "Timeline and lifecycle history of a complaint"
+    },
+    "/departments/{departmentId}": {
+      "schema": "Department",
+      "description": "Campus maintenance departments"
+    },
+    "/staff/{staffId}": {
+      "schema": "Staff",
+      "description": "Maintenance and facility staff members"
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "Student resolution feedback records"
+    }
+  }
+}

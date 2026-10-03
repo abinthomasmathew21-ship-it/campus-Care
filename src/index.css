@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Institutional Light Mode */
+  --bg-campus: #f7f8f6;
+  --bg-card: #ffffff;
+  --bg-subtle: #eff2ee;
+  --bg-hover: #e9ece8;
+  --text-primary: #18221c;
+  --text-secondary: #526359;
+  --text-muted: #7d8f85;
+  --border-blueprint: #dce3dd;
+  --border-subtle: #e9eee9;
+
+  --brand-forest: #1b3d2f;
+  --brand-forest-hover: #142f24;
+  --brand-forest-light: #eaf3ee;
+  --brand-teal: #2d5a51;
+  --brand-mint: #3d806c;
+
+  --color-resolved: #237848;
+  --color-resolved-bg: #eaf6ee;
+  --color-resolved-border: #bfe3cc;
+
+  --color-attention: #ab6e10;
+  --color-attention-bg: #fdf6ea;
+  --color-attention-border: #f0deaf;
+
+  --color-high: #bd5119;
+  --color-high-bg: #fdf0ea;
+  --color-high-border: #f7cfbe;
+
+  --color-urgent: #b82b28;
+  --color-urgent-bg: #fceeee;
+  --color-urgent-border: #f5c4c2;
+
+  --color-info: #235c87;
+  --color-info-bg: #ecf3f9;
+  --color-info-border: #c4dcee;
+
+  --grid-major: rgba(27, 61, 47, 0.05);
+  --grid-minor: rgba(27, 61, 47, 0.02);
+  --blueprint-cross: rgba(27, 61, 47, 0.12);
+}
+
+.dark {
+  /* Institutional Dark Mode (Graphite with green undertone) */
+  --bg-campus: #101513;
+  --bg-card: #151d19;
+  --bg-subtle: #1c2722;
+  --bg-hover: #223029;
+  --text-primary: #f1f5f2;
+  --text-secondary: #9cb1a5;
+  --text-muted: #64756b;
+  --border-blueprint: #24332b;
+  --border-subtle: #1d2922;
+
+  --brand-forest: #2f614b;
+  --brand-forest-hover: #3a755b;
+  --brand-forest-light: #182b21;
+  --brand-teal: #4b8979;
+  --brand-mint: #62b89d;
+
+  --color-resolved: #48a66f;
+  --color-resolved-bg: #132b1d;
+  --color-resolved-border: #224d34;
+
+  --color-attention: #d99b26;
+  --color-attention-bg: #2c2310;
+  --color-attention-border: #523f18;
+
+  --color-high: #e27334;
+  --color-high-bg: #2d1d12;
+  --color-high-border: #5b301a;
+
+  --color-urgent: #e04b47;
+  --color-urgent-bg: #301615;
+  --color-urgent-border: #5c201e;
+
+  --color-info: #468ac2;
+  --color-info-bg: #122433;
+  --color-info-border: #1e3f5b;
+
+  --grid-major: rgba(98, 184, 157, 0.07);
+  --grid-minor: rgba(98, 184, 157, 0.025);
+  --blueprint-cross: rgba(98, 184, 157, 0.15);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-campus);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Campus Architectural Blueprint background */
+.blueprint-bg {
+  background-color: var(--bg-campus);
+  background-image: 
+    linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-minor) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+/* Subtle blueprint card grid accent */
+.card-blueprint {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-blueprint);
+}
+
+/* Technical font */
+.font-technical {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-blueprint);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

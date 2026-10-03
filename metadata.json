@@ -1,0 +1,6 @@
+{
+  "name": "CampusCare - Campus Issue & Infrastructure Management",
+  "description": "CampusCare is a university campus infrastructure and issue management SaaS platform featuring architectural blueprint views, role-based workflows, and incident tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
